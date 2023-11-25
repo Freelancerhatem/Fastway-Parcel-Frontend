@@ -2,27 +2,35 @@ import { Link, Outlet } from "react-router-dom";
 
 
 const Dashboard = () => {
-    return (
-        <div className="">
-            <div className="drawer lg:drawer-open">
-                <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col items-center justify-center">
-                    <Outlet></Outlet>
+    const isUser =false;
+    if (isUser){
+        return (
+            <div className="grid grid-cols-6">
+                <div className="col-span-1">
+                        
+                        <ul className="menu p-4  min-h-full bg-base-200 text-base-content">
+                            {/* Sidebar content here */}
+                            <li><Link to='/dashboard/parcel-book'>Book A Parcel</Link></li>
+                            <li><Link to='/dashboard/my-parcel'>My Parcel</Link></li>
+                            <li><Link to='/dashboard/my-profile'>My Profile</Link></li>
+                            
+                        </ul>
+    
+                    </div>
                 
-
-                </div>
-                <div className="drawer-side">
-                    <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-                        {/* Sidebar content here */}
-                        <li><Link to='/dashboard/parcel-book'>Book A Parcel</Link></li>
-                        <li><a>Sidebar Item 2</a></li>
-                    </ul>
-
+                <div className="col-span-5">
+                    
+                    <div className="">
+                        <Outlet></Outlet>
+                    
+    
+                    </div>
+                    
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
+    
 };
 
 export default Dashboard;
