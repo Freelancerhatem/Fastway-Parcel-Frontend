@@ -1,7 +1,7 @@
 
 import PropTypes from 'prop-types';
 
-const ParcelCardData = ({ parcelContent,index }) => {
+const ParcelCardData = ({ parcelContent,index,handleShowModal}) => {
     const { userName, userPhone, bookingDate, requestedDeliveryDate, cost, status } = parcelContent;
      const indexNum = parseInt(index)
      const indexSum = indexNum +1
@@ -17,7 +17,7 @@ const ParcelCardData = ({ parcelContent,index }) => {
                     <span className='ml-4'>{requestedDeliveryDate}</span>
                     <span className='ml-6'>{cost}</span>
                     <span className='ml-6'>{status}</span>
-                    <button className='bg-yellow-100 ml-6 rounded-md text-base font-semibold p-1 w-1/2'>Manage</button>
+                    <button onClick={handleShowModal}  className='bg-yellow-100 ml-6 rounded-md text-base font-semibold p-1 w-1/2'>Manage</button>
             </td>
                 
                     
@@ -29,7 +29,9 @@ const ParcelCardData = ({ parcelContent,index }) => {
 
 ParcelCardData.propTypes = {
     parcelContent: PropTypes.object,
-    index:PropTypes.number
+    index:PropTypes.number,
+    handleShowModal:PropTypes.func
+    
 };
 
 export default ParcelCardData;

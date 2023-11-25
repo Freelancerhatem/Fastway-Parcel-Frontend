@@ -8,6 +8,8 @@ import BookedParcel from "../Layout/Dashboard/BookedParcel/BookedParcel";
 import MyParcel from "../Layout/Dashboard/MyParcel/MyParcel";
 import MyProfile from "../Layout/Dashboard/MyProfile/MyProfile";
 import AllParcel from "../Layout/AdminDashboard/AllParcel/AllParcel";
+import DeliveryMans from "../Layout/AdminDashboard/DeliveryMans/DeliveryMans";
+import AllUser from "../Layout/AdminDashboard/AllUser/AllUser";
 
 export const router = createBrowserRouter([
     {
@@ -54,6 +56,14 @@ export const router = createBrowserRouter([
             {
                 path:'all-parcel',
                 element:<AllParcel></AllParcel>
+            },
+            {
+                path:'employees',
+                element:<DeliveryMans></DeliveryMans>
+            },
+            {
+                path:'users',
+                element:<AllUser></AllUser>
             },
             
         ]
