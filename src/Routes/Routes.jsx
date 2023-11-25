@@ -3,6 +3,8 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
 import SignUp from "../Pages/SignUp/SignUp";
 import SignIn from "../Pages/SignIn/SignIn";
+import Dashboard from "../Layout/Dashboard/Dashboard";
+import BookedParcel from "../Layout/Dashboard/BookedParcel/BookedParcel";
 
 export const router = createBrowserRouter([
     {
@@ -22,11 +24,22 @@ export const router = createBrowserRouter([
             {
                 path: 'signup',
                 element: <SignUp></SignUp>,
-            }
+            },
+            
 
 
         ]
     },
+    {
+        path:'/dashboard',
+        element:<Dashboard></Dashboard>,
+        children:[
+            {
+                path:'parcel-book',
+                element:<BookedParcel></BookedParcel>
+            }
+        ]
+    }
 ]);
 
 //

@@ -30,6 +30,14 @@ const Navbar = () => {
         >
             Sign up
         </NavLink>
+        <NavLink
+            to="/dashboard"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "border-b-2 border-[#fac900]" : ""
+            }
+        >
+            Dashboard
+        </NavLink>
 
     </>
     return (
