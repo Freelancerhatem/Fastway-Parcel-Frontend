@@ -8,7 +8,7 @@ const Banner = () => {
 
     return (
         <div className='max-w-full   h-screen bg-no-repeat bg-cover bg-center ' style={{ backgroundImage: backgroundImageUrl }}>
-            <div className="absolute flex flex-col justify-center items-center bg-black inset-0 bg-opacity-50">
+            <div className="absolute flex flex-col justify-center items-center bg-white inset-0 bg-opacity-20">
                 <div className="   w-1/3  ">
                     <form className="relative" >
                         <input type="text" name="search" placeholder="search here....." className="input  relative input-bordered rounded-full  bg-[#1db7ad]  placeholder:text-gray-200  placeholder:font-bold  focus:outline-none mx-auto  w-full " required />

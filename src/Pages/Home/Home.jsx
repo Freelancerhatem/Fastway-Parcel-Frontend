@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import Banner from "./Banner/Banner";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import Featured from "../../components/Featured/Featured";
+import TopDeliveryMan from "../../components/TopDeliveryMan/TopDeliveryMan";
 
 
 const Home = () => {
@@ -14,6 +15,8 @@ const Home = () => {
             <Banner></Banner>
             <SectionTitle header='We Provide Best Service' text={mytext}></SectionTitle>
             <Featured></Featured>
+            <TopDeliveryMan></TopDeliveryMan>
+            
         </div>
     );
 };

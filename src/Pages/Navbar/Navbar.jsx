@@ -15,25 +15,25 @@ const Navbar = () => {
             Home
         </NavLink>
         <NavLink
-            to="/"
+            to="/signin"
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "border-b-2 border-[#fac900]" : ""
             }
         >
-            Home
+            Sign in
         </NavLink>
         <NavLink
-            to="/"
+            to="/signup"
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "border-b-2 border-[#fac900]" : ""
             }
         >
-            Home
+            Sign up
         </NavLink>
 
     </>
     return (
-        <div className={`min-w-full px-14 fixed z-10 flex items-center justify-between  text-black ${transparentNav? 'bg-transparent' : '' }` }>
+        <div className={`min-w-full px-14 fixed z-10 flex items-center justify-between bg-opacity-50   text-black ${transparentNav? 'bg-black' : '' }` }>
             <img src={logo} className='w-44 ' alt="logo" />
             <ul className='text-[#1db7ad] flex gap-4 '>
             {navlist}

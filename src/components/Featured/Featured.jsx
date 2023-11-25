@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import FeaturedCard from "./FeaturedCard/FeaturedCard";
+import HomeStatics from "../HomeStatics/HomeStatics";
 
 const Featured = () => {
     const[Data,setData]=useState([]);
@@ -10,11 +11,18 @@ const Featured = () => {
         .then(data=>setData(data))
     },[])
     return (
-        <div className="grid gap-12 grid-cols-3 px-14">
+        <>
+            <div className="grid gap-12 grid-cols-3 px-14">
             {
                 Data.map((singledata,idx)=><FeaturedCard key={idx} singledata={singledata}></FeaturedCard>)
             }
-        </div>
+            </div>
+            <div className="mt-12 max-w-[100vw] flex justify-center">
+                <HomeStatics></HomeStatics>
+            </div>
+
+        </>
+        
     );
 };
 

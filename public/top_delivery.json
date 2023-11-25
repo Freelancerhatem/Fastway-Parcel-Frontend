@@ -1,0 +1,33 @@
+[
+    {
+      "name": "Product A",
+      "image": "https://www.xtlplus.com/wp-content/uploads/2019/06/delivery-guy.jpg",
+      "number": "12345",
+      "ratings": 4.5
+    },
+    {
+      "name": "Product B",
+      "image": "https://www.xtlplus.com/wp-content/uploads/2019/06/delivery-guy.jpg",
+      "number": "67890",
+      "ratings": 3.8
+    },
+    {
+      "name": "Product C",
+      "image": "https://www.xtlplus.com/wp-content/uploads/2019/06/delivery-guy.jpg",
+      "number": "54321",
+      "ratings": 4.2
+    },
+    {
+      "name": "Product D",
+      "image": "https://www.xtlplus.com/wp-content/uploads/2019/06/delivery-guy.jpg",
+      "number": "98765",
+      "ratings": 4.0
+    },
+    {
+      "name": "Product E",
+      "image": "https://www.xtlplus.com/wp-content/uploads/2019/06/delivery-guy.jpg",
+      "number": "13579",
+      "ratings": 4.8
+    }
+  ]
+  
