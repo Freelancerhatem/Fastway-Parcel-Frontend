@@ -1,17 +1,34 @@
-import { useState,useEffect } from "react";
+// import { useState,useEffect } from "react";
 import UsersCard from "./UsersCard";
+import useUsers from "../../../Hooks/useUsers";
+import toast, { Toaster } from "react-hot-toast";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure/useAxiosSecure";
 
 
 const AllUser = () => {
-    const[Data,setData] = useState([]);
+    const [users,refetch] = useUsers();
+    const axiosSecure = useAxiosSecure()
     
-     useEffect(()=>{
-        fetch('/userdata.json')
-        .then(res=>res.json())
-        .then(data=>setData(data))
-    },[])
+    const handleDeliveryMan=(id)=>{
+        const userData = users.find(user=>user._id===id);
+        const{name,userType} = userData
+        
+        axiosSecure.patch(`/users/admin/${id}`)
+        .then(res=>{
+            if(res.data.modifiedCount>0){
+                refetch();
+                toast.success(`${name} ${userType}`);
+                
+            }
+        })
+
+
+
+        toast.success(id)
+    }
     return (
         <div className=" px-14">
+            <Toaster></Toaster>
             <table className="table">
                 {/* head */}
                 <thead>
@@ -31,7 +48,7 @@ const AllUser = () => {
                 <tbody className="">
 
                     {
-                        Data?.map((userData, index) =><UsersCard key={index} index={index} userData={userData}></UsersCard>) 
+                        users?.map((userData, index) =><UsersCard key={index} handleDeliveryMan={handleDeliveryMan} index={index} userData={userData}></UsersCard>) 
                     }
                 </tbody>
 

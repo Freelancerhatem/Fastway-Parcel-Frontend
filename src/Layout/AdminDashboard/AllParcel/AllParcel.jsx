@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ParcelCardData from "./ParcelCardData";
-import toast, { Toaster } from "react-hot-toast";
 
 
 const AllParcel = () => {
@@ -9,7 +8,9 @@ const AllParcel = () => {
         fetch('/parcel.json')
             .then(res => res.json())
             .then(data => setParcelData(data))
-    }, [])
+    }, []);
+
+    
 
 
     const handleShowModal = (e) => {

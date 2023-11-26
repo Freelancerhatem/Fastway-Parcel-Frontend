@@ -40,7 +40,7 @@ const Dashboard = () => {
     else {
         return (
             <div className="grid grid-cols-6 ">
-                <div className="col-span-1 ">
+                <div className="col-span-1 fixed">
 
                     <ul className="menu p-4 min-h-screen    bg-base-200 text-base-content">
                         {/* Sidebar content here */}
@@ -55,7 +55,7 @@ const Dashboard = () => {
 
                 </div>
 
-                <div className="col-span-5">
+                <div className="col-span-5 relative left-56 mb-12">
                     {
                         path == mypath ?
                             <div className="flex justify-center mt-32">
