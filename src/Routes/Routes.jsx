@@ -10,6 +10,8 @@ import MyProfile from "../Layout/Dashboard/MyProfile/MyProfile";
 import AllParcel from "../Layout/AdminDashboard/AllParcel/AllParcel";
 import DeliveryMans from "../Layout/AdminDashboard/DeliveryMans/DeliveryMans";
 import AllUser from "../Layout/AdminDashboard/AllUser/AllUser";
+import MyDelivery from "../Layout/DeliveryManDashBoard/MyDelivery/MyDelivery";
+import MyReviews from "../Layout/DeliveryManDashBoard/MyReviews/MyReviews";
 
 export const router = createBrowserRouter([
     {
@@ -39,7 +41,7 @@ export const router = createBrowserRouter([
         path:'/dashboard',
         element:<Dashboard></Dashboard>,
         children:[
-            
+            // normal user routes
             {
                 path:'parcel-book',
                 element:<BookedParcel></BookedParcel>,
@@ -47,12 +49,14 @@ export const router = createBrowserRouter([
             },
             {
                 path:'my-parcel',
-                element:<MyParcel></MyParcel>
+                element:<MyParcel></MyParcel>,
+                // loader:()=>fetch('http://localhost:5000/reviews')
             },
             {
                 path:'my-profile',
                 element:<MyProfile></MyProfile>
             },
+            // admin routes
             {
                 path:'all-parcel',
                 element:<AllParcel></AllParcel>
@@ -65,6 +69,21 @@ export const router = createBrowserRouter([
                 path:'users',
                 element:<AllUser></AllUser>
             },
+            // deliveryman routes
+            {
+                path:'mydelivery',
+                element: <MyDelivery></MyDelivery>
+            },
+            {
+                path:'allparcel',
+                element: 'all parcel'
+            },
+            {
+                path:'reviews',
+                element: <MyReviews></MyReviews>,
+                loader:()=>fetch('http://localhost:5000/reviews')
+            },
+            
             
         ]
     }

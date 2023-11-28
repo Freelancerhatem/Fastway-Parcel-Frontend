@@ -12,11 +12,53 @@ const AllUser = () => {
 
     const handleDeliveryMan = (id) => {
         const userData = users.find(user => user._id === id);
-        const { name, userType } = userData
+        const { name } = userData
 
         Swal.fire({
             title: "Do You Want?",
             text: `${name} Make A Delivery  Man`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#1db7ad",
+            cancelButtonColor: "#fac900",
+            confirmButtonText: "Yes"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.patch(`/users/deliveryman/${id}`)
+                    .then(res => {
+                        if (res.data.modifiedCount > 0) {
+                            refetch();
+                            // toast.success(`${name} ${userType}`);
+
+                        }
+                    })
+
+
+
+                Swal.fire({
+                    title: "Success!",
+                    text: `${name} is now a Delivery Man`,
+                    icon: "success"
+                });
+            }
+        });
+
+
+
+
+
+
+    }
+    
+    
+    const handleAdmin = (id) => {
+        const userData = users.find(user => user._id === id);
+        const { name } = userData
+
+        Swal.fire({
+            title: "Do You Want?",
+            text: `${name} Make Admin`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#1db7ad",
@@ -38,7 +80,7 @@ const AllUser = () => {
 
                 Swal.fire({
                     title: "Success!",
-                    text: `${name} is now a Delivery Man`,
+                    text: `${name} is now an admin`,
                     icon: "success"
                 });
             }
@@ -72,7 +114,7 @@ const AllUser = () => {
                 <tbody className="">
 
                     {
-                        users?.map((userData, index) => <UsersCard key={index} handleDeliveryMan={handleDeliveryMan} index={index} userData={userData}></UsersCard>)
+                        users?.map((userData, index) => <UsersCard key={index} handleAdmin={handleAdmin} handleDeliveryMan={handleDeliveryMan} index={index} userData={userData}></UsersCard>)
                     }
                 </tbody>
 

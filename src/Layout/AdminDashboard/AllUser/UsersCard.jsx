@@ -1,7 +1,7 @@
 
 import PropTypes from 'prop-types';
 
-const UsersCard = ({userData,index,handleDeliveryMan}) => {
+const UsersCard = ({userData,index,handleDeliveryMan,handleAdmin}) => {
     const{name,totalSpentAmount,parcelsDelivered,phoneNumber,_id,userType} = userData;
     const indexNum = parseInt(index)
      const indexSum = indexNum +1
@@ -19,7 +19,13 @@ const UsersCard = ({userData,index,handleDeliveryMan}) => {
                     :
                     <span>Delivery Man</span>
                 }
-                <button className='btn btn-sm'>Make Admin</button>
+                {
+                    userType !== 'admin' ?
+                    <button onClick={()=>handleAdmin(_id)} className={`btn btn-sm`}>Make Admin</button>
+                    :
+                    <span>Admin</span>
+                }
+                
                 
             </td>
         </tr>
@@ -29,7 +35,8 @@ const UsersCard = ({userData,index,handleDeliveryMan}) => {
 UsersCard.propTypes = {
     userData:PropTypes.object,
     index:PropTypes.number,
-    handleDeliveryMan:PropTypes.func
+    handleDeliveryMan:PropTypes.func,
+    handleAdmin:PropTypes.func
 };
 
 export default UsersCard;

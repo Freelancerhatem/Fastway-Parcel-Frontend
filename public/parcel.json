@@ -5,8 +5,8 @@
       "bookingDate": "2023-01-15",
       "requestedDeliveryDate": "2023-01-20",
       "cost": 25.99,
-      "status": "Pending",
-      "manageButton": "View Details"
+      "status": "pending"
+      
     },
     {
       "userName": "Alice Smith",
@@ -14,8 +14,8 @@
       "bookingDate": "2023-02-05",
       "requestedDeliveryDate": "2023-02-12",
       "cost": 18.50,
-      "status": "Shipped",
-      "manageButton": "Track Parcel"
+      "status": "pending"
+      
     },
     {
       "userName": "Eva Johnson",
@@ -23,8 +23,7 @@
       "bookingDate": "2023-03-10",
       "requestedDeliveryDate": "2023-03-18",
       "cost": 30.75,
-      "status": "Delivered",
-      "manageButton": "Reorder"
+      "status": "pending"
     },
     {
       "userName": "Bob Anderson",
@@ -32,8 +31,7 @@
       "bookingDate": "2023-04-22",
       "requestedDeliveryDate": "2023-04-30",
       "cost": 42.25,
-      "status": "In Transit",
-      "manageButton": "Track Status"
+      "status": "pending"
     },
     {
       "userName": "Mia Williams",
@@ -41,8 +39,7 @@
       "bookingDate": "2023-05-15",
       "requestedDeliveryDate": "2023-05-22",
       "cost": 21.90,
-      "status": "Pending Payment",
-      "manageButton": "Pay Now"
+      "status": "pending"
     }
   ]
   
