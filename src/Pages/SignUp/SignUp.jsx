@@ -1,8 +1,16 @@
 import toast, { Toaster } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img from '../../assets/images/signupcover.jpg'
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { auth } from "../../firebase/firebase.config";
+import useAxiosSecure from "../../Hooks/useAxiosSecure/useAxiosSecure";
 
 const SignUp = () => {
+    const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure();
+    const { createUser, setUser, user, signOutUser, updateUserData } = useContext(AuthContext);
+
     const handleCreateUser = e => {
         e.preventDefault();
         toast.success('Here is your toast.');
@@ -12,14 +20,54 @@ const SignUp = () => {
         const password = form.password.value;
         const userType = form.type.value;
         const image = form.image.value;
-        const userData ={name,email,password,userType,image};
-        console.log(userData)
+        let TypeOfUser = ''
+        if (userType == 'admin') {
+            TypeOfUser = 'isAdmin'
+        }
+        else if (userType == 'deliveryMan') {
+            TypeOfUser = 'isdeliveryMan'
+        }
+        else {
+            TypeOfUser = 'user'
+        }
+
+
+        const userData = { name, email, TypeOfUser, image };
+        // console.log(userData);
+
+        createUser(email, password)
+            .then(() => {
+                updateUserData(name, image)
+                    .then(() => {
+                        // save user to db
+                        axiosSecure.post('/allusersdata', userData)
+                            .then(() => {
+                                toast.success('sign up success')
+                                setUser(auth.currentUser);
+                                // signOutUser();
+                                navigate('/')
+                            })
+                            .catch(()=>{
+                                toast.error('data update failed')
+                            })
+
+
+
+                    })
+            }).catch((error) => {
+                console.log(error.message)
+
+
+            });
+
     }
-    const BackImage =`url(${img})`;
-    
-    
+    console.log(user)
+
+    const BackImage = `url(${img})`;
+
+
     return (
-        <div className="bg-no-repeat max-w-full h-screen  bg-center bg-cover" style={{backgroundImage: BackImage}} >
+        <div className="bg-no-repeat max-w-full h-screen  bg-center bg-cover" style={{ backgroundImage: BackImage }} >
             <Toaster></Toaster>
             <div className="container mx-auto absolute   py-8">
                 <h1 className="text-2xl font-bold mb-6 text-center">Sign Up</h1>

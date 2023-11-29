@@ -1,16 +1,38 @@
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 
 const SignIn = () => {
+    const{LoginUser,googleLogin,user}=useContext(AuthContext);
+    console.log(user)
+    
     const handleLogin =e=>{
         e.preventDefault();
-        toast.success('login succes');
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        LoginUser(email,password)
+        .then(()=>{           
+           toast.success('login success')
+           //   navigate(`${location?.state?  location.state : '/' }`)
+        })
+        .catch(()=>{
+            toast.error('login failed')
+        })
+        form.email.value ='';
+        form.password.value='';
     }
+    // google login
     const handleGoogleLogin =e=>{
         e.preventDefault();
-        toast.success('login google succes');
+        googleLogin()
+        toast.success('login success')
+        
+        
     }
     return (
         <div className="flex mt-32 items-center" >

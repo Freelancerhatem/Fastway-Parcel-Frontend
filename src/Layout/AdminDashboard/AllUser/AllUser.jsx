@@ -103,9 +103,10 @@ const AllUser = () => {
                         <td>Name</td>
                         <td>Phone</td>
                         <td>Parcel Delivery</td>
-                        <td >Total Amount</td>
-                        <td >Total Amount</td>
-                        <td >Total Amount</td>
+                        <td>Total Spent</td>
+                        <td >Make Del. Man</td>
+                        <td >Make Admin</td>
+                        <td >Request For</td>
 
 
 

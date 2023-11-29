@@ -1,17 +1,97 @@
-import toast from "react-hot-toast";
+import { useContext, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure/useAxiosSecure";
 
 
 const BookedParcel = () => {
-    const userName = ''
-    const yyMMDD = ''
-    const userEmail = ''
+    const axiosSecure = useAxiosSecure();
+    const { user } = useContext(AuthContext);
+    const { displayName, email } = user;
+    const [weight, setWeight] = useState('');
+    const [price, setPrice] = useState('');
+
+    const handleWeightChange = (event) => {
+        const newWeight = event.target.value;
+        setWeight(newWeight);
+
+
+        const calculatedPrice = calculatePrice(newWeight);
+        setPrice(calculatedPrice);
+    };
+
+    const calculatePrice = (weight) => {
+
+        const pricePerUnitWeight = 50;
+        let calculatedPrice;
+
+        if (weight === '' || weight <= 0) {
+            calculatedPrice = '';
+        } else if (weight == 1) {
+            calculatedPrice = pricePerUnitWeight;
+        } else if (weight == 2) {
+            calculatedPrice = pricePerUnitWeight * 2;
+        } else {
+
+            calculatedPrice = 150;
+        }
+
+        return calculatedPrice
+    };
+
+    const todayDate = new Date();
+    const tomorrowDate = new Date();
+    tomorrowDate.setDate(todayDate.getDate() + 3);
+    const formattedTomorrowDate = `${tomorrowDate.getFullYear()}-${(tomorrowDate.getMonth() + 1).toString().padStart(2, '0')}-${tomorrowDate.getDate().toString().padStart(2, '0')}`;
+
+    const currentDate = new Date();
+    const year = currentDate.getUTCFullYear();
+    const month = (currentDate.getUTCMonth() + 1).toString().padStart(2, '0');
+    const day = currentDate.getUTCDate().toString().padStart(2, '0');
+
+    const yyMMDD =  year.toString() + '-' + month + '-' + day;
+    
+
+
+
+
+
     const handleSubmit = e => {
         e.preventDefault();
-        toast.success('submitted')
+        const form = e.target;
+        const name =form.name.value;
+        const email =form.email.value;
+        const number =form.number.value;
+        const category =form.category.value;
+        const weight =form.weight.value;
+        const receiversName =form.receiversName.value;
+        const receiversNumber =form.receiversNumber.value;
+        const ParcelDeliveryAddress =form.ParcelDeliveryAddress.value;
+        const bookingDate =new Date();
+        const deliveryDate =form.deliveryDate.value;
+        const latitude =form.latitude.value;
+        const longitude =form.longitude.value;
+        const status = 'pending';
+        const deliveryMan = ''
+        const price =form.price.value;
+
+        const parcelData ={name,email,number,category,weight,receiversName,receiversNumber,ParcelDeliveryAddress,deliveryDate,status,deliveryMan,bookingDate:yyMMDD,latitude,longitude,price}
+        
+        axiosSecure.post('/bookParcel',parcelData)
+        .then(res=>{
+            if(res.data.insertedId){
+                toast.success('parcel booking successful')
+            }
+            console.log(res.data)})
+        
+        // console.log(parcelData);
+        
     }
+    
     return (
         <div className="w-full p-14">
             <div className="  bg-white ">
+                <Toaster></Toaster>
 
                 <form onSubmit={handleSubmit}>
                     <h1 className="text-center text-3xl font-semibold mt-6 text-orange-400">Book Your Parcel</h1>
@@ -19,77 +99,69 @@ const BookedParcel = () => {
                     <div className="grid   gap-6 my-6 lg:grid-cols-2">
                         <div>
                             <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your Name</label>
-                            <input type="text" required id="first_name" name="name" className="bg-gray-50  border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" placeholder="Name" />
+                            <input name="name" type="text" required defaultValue={displayName} readOnly  className="bg-gray-50  border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" placeholder="Name" />
                         </div>
                         <div>
                             <label htmlFor="buyer mail" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">User Email</label>
-                            <input type="email" readOnly name="useremail" required defaultValue={userEmail} className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
+                            <input name="email" type="email" readOnly required defaultValue={email} className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
                         </div>
                         <div>
                             <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Phone Number</label>
-                            <input type="number" min={'0'} name="number" required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
+                            <input name="number" type="number" min={'01'}  required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
                         </div>
                         <div>
 
-                            <label htmlFor="option" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Parcel Type?</label>
+                            <label htmlFor="option"  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Parcel Type?</label>
 
-                            <select defaultValue={'category'} htmlFor="Category" name='category' required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500">Category
+                            <select name='category' defaultValue={'category'} htmlFor="Category"  required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500">Category
                                 <option value="category">Type</option>
-                                <option value="Pasta">Pasta</option>
-                                <option value="Pizza">Pizza</option>
-                                <option value="Salad">Salad</option>
-                                <option value="Burger">Burger</option>
-                                <option value="Sushi">Sushi</option>
-                                <option value="Stir-Fry">Stir-Fry</option>
-                                <option value="Seafood">Seafood</option>
-                                <option value="Mexican">Mexican</option>
-                                <option value="Beverage">Beverage</option>
-                                <option value="Side Dish">Side Dish</option>
-                                <option value="Soup">Soup</option>
+                                <option value="Box">Box</option>
+                                <option value="Poly Mailers">Poly Mailers</option>
+                                <option value="Flat Rate Boxes">Flat Rate Boxes</option>
+
                             </select>
                         </div>
                         <div>
                             <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Parcel Weight</label>
-                            <input type="number" min={'0'} name="number" required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
+                            <input name="weight" type="number" onChange={handleWeightChange} min={1}  required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
                         </div>
-                        <div>
-                            <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Date</label>
-                            <input type="text" name="" required defaultValue={yyMMDD} readOnly className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
-                        </div>
+
                         <div>
                             <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Receivers Name</label>
-                            <input type="text" readOnly name="username" required defaultValue={userName} className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
+                            <input type="text" name="receiversName" required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
                         </div>
                         <div>
                             <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Receivers Number</label>
-                            <input type="number" min={'0'} name="receivers-number" required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
+                            <input type="number" min={'0'} name="receiversNumber" required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
                         </div>
                         <div>
                             <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Parcel Delivery Address</label>
-                            <input type="text"  name="ParcelDeliveryAddress" required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
+                            <input type="text" name="ParcelDeliveryAddress" required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
                         </div>
                         <div>
-                            <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Delivery Date</label>
-                            <input type="date"  name="deliveryDate" required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
+                            <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Request Delivery Date</label>
+                            <input type="date" name="deliveryDate"  defaultValue={formattedTomorrowDate} required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
                         </div>
                         <div>
                             <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Latitude</label>
-                            <input type="number"  min={'0'} name="latitude" required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
+                            <input type=""  name="latitude" required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
                         </div>
                         <div>
                             <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Longitude</label>
-                            <input type="number"  min={'0'} name="longitude" required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
+                            <input type=""  name="longitude" required className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
                         </div>
-                        
+
                         <div>
                             <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Price</label>
-                            <input type="number" name="price" required min={0} className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
+                            <input type="number" name="price" required min={0} defaultValue={price} className="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" />
                         </div>
-                        
+
 
                     </div>
 
-                    <button type="submit" className="text-white w-full bg-orange-400 hover:bg-orange-300 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">Add Food</button>
+                    <div className="w-full text-center">
+                        <button type="submit" className="text-white w-32 mx-auto bg-orange-400 hover:bg-orange-300 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-full text-sm  px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">Book</button>
+                    </div>
                 </form>
 
 

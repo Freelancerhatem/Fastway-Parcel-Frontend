@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
             {
                 path:'my-parcel',
                 element:<MyParcel></MyParcel>,
-                // loader:()=>fetch('http://localhost:5000/reviews')
+                loader:()=>fetch('http://localhost:5000/reviews')
             },
             {
                 path:'my-profile',
@@ -75,13 +75,9 @@ export const router = createBrowserRouter([
                 element: <MyDelivery></MyDelivery>
             },
             {
-                path:'allparcel',
-                element: 'all parcel'
-            },
-            {
                 path:'reviews',
                 element: <MyReviews></MyReviews>,
-                loader:()=>fetch('http://localhost:5000/reviews')
+                
             },
             
             

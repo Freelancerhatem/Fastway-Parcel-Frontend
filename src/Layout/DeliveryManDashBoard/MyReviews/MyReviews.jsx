@@ -1,14 +1,16 @@
+import useReviews from "../../../Hooks/useReviews/useReviews";
 import MyReviewsCard from "./MyReviewsCard";
-import { useLoaderData } from "react-router-dom";
 
 
 const MyReviews = () => {
-    const reviews = useLoaderData();
+    
+    const [Reviews] = useReviews();
+    console.log(Reviews)
     return (
         <div className="">
             
         {
-            reviews.map((review, index) => <MyReviewsCard review={review} index={index} key={index}></MyReviewsCard>)
+            Reviews?.map((review, index) => <MyReviewsCard review={review} index={index} key={index}></MyReviewsCard>)
         }
 
     </div>   

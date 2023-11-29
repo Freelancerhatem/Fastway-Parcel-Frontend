@@ -2,17 +2,18 @@
 import PropTypes from 'prop-types';
 
 const UsersCard = ({userData,index,handleDeliveryMan,handleAdmin}) => {
-    const{name,totalSpentAmount,parcelsDelivered,phoneNumber,_id,userType} = userData;
+    const{name,_id,TypeOfUser,phone,parcelsDelivered,totalSpentAmount,userType} = userData;
     const indexNum = parseInt(index)
-     const indexSum = indexNum +1
+     const indexSum = indexNum +1;
+     console.log(TypeOfUser)
     return (
         <tr>
-            <td className={`grid grid-cols-8 gap-2 text-center rounded-md mt-2 ${indexSum%2 == 0 ? 'bg-green-200' :'bg-gray-200' }`}>
+            <td className={`grid grid-cols-8 gap-2 text-center items-center rounded-md mt-2 ${indexSum%2 == 0 ? 'bg-green-200' :'bg-gray-200' }`}>
                 <span>{indexSum}</span>
                 <span>{name}</span>
-                <span>{phoneNumber}</span>
-                <span>{parcelsDelivered}</span>
-                <span>{totalSpentAmount}</span>
+                <span>{phone? phone : 'N/A'}</span>
+                <span> {parcelsDelivered? parcelsDelivered : 'N/A'}</span>
+                <span>{totalSpentAmount?totalSpentAmount :'N/A'}</span>
                 {
                     userType !== 'deliveryMan' ?
                 <button onClick={()=>handleDeliveryMan(_id)} className={`btn btn-sm`}>Make D. Man</button>
@@ -25,6 +26,7 @@ const UsersCard = ({userData,index,handleDeliveryMan,handleAdmin}) => {
                     :
                     <span>Admin</span>
                 }
+                <span>{TypeOfUser === 'isAdmin'? 'admin':TypeOfUser === 'isdeliveryMan'? 'delivery man' :'N/A'}</span>
                 
                 
             </td>

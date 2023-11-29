@@ -5,8 +5,8 @@ import LineChartsComponents from "../AdminDashboard/Charts/LineChartsComponents"
 
 const Dashboard = () => {
     
-    const deliveryMan =true ;
-    const isUser = false;
+    const deliveryMan =false ;
+    const isUser = true;
     const isAdmin = false;
     const location = useLocation();
     const path = location.pathname;
