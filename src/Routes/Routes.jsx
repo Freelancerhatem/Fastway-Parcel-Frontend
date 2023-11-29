@@ -12,6 +12,7 @@ import DeliveryMans from "../Layout/AdminDashboard/DeliveryMans/DeliveryMans";
 import AllUser from "../Layout/AdminDashboard/AllUser/AllUser";
 import MyDelivery from "../Layout/DeliveryManDashBoard/MyDelivery/MyDelivery";
 import MyReviews from "../Layout/DeliveryManDashBoard/MyReviews/MyReviews";
+import UpdateParcel from "../Layout/Dashboard/UpdateParcel/UpdateParcel";
 
 export const router = createBrowserRouter([
     {
@@ -50,7 +51,12 @@ export const router = createBrowserRouter([
             {
                 path:'my-parcel',
                 element:<MyParcel></MyParcel>,
-                loader:()=>fetch('http://localhost:5000/reviews')
+                
+            },
+            {
+                path:'updateParcel/:id',
+                element:<UpdateParcel></UpdateParcel>,
+                
             },
             {
                 path:'my-profile',

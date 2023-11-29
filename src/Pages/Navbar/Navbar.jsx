@@ -23,6 +23,14 @@ const Navbar = () => {
         >
             Home
         </NavLink>
+        <NavLink
+            to="/dashboard"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "border-b-2 border-[#fac900]" : ""
+            }
+        >
+            Dashboard
+        </NavLink>
         {
             user ? <div>
                 <button onClick={handleLogOut} className="btn btn-sm">logout</button>
@@ -49,14 +57,7 @@ const Navbar = () => {
         }
 
 
-        <NavLink
-            to="/dashboard"
-            className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "border-b-2 border-[#fac900]" : ""
-            }
-        >
-            Dashboard
-        </NavLink>
+        
 
 
     </>

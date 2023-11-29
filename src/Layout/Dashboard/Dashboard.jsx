@@ -1,18 +1,31 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import BarChartComponents from "../AdminDashboard/Charts/BarChartComponents";
 import LineChartsComponents from "../AdminDashboard/Charts/LineChartsComponents";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import useAxiosSecure from "../../Hooks/useAxiosSecure/useAxiosSecure";
 
 
 const Dashboard = () => {
-    
-    const deliveryMan =false ;
-    const isUser = true;
-    const isAdmin = false;
+    const axiosSecure = useAxiosSecure();
+
+
     const location = useLocation();
     const path = location.pathname;
-    const mypath = '/dashboard'
+    const mypath = '/dashboard';
 
-    if (isUser) {
+    // check user type
+    const { user } = useContext(AuthContext);
+    const [userDbData, setuserDbData] = useState({})
+    const { email } = user;
+
+    useEffect(() => {
+        axiosSecure.get(`/loginUserType?user=${email}`)
+            .then(res => setuserDbData(res.data))
+    }, [axiosSecure, email])
+
+
+    if (email === userDbData.email && userDbData.userType === 'user' || email === userDbData.email && userDbData.TypeOfUser === 'isdeliveryMan') {
         return (
             <div className="grid grid-cols-6">
                 <div className="col-span-1">
@@ -40,7 +53,7 @@ const Dashboard = () => {
             </div>
         );
     }
-    else if (isAdmin) {
+    else if (email === userDbData.email && userDbData.userType === 'admin') {
         return (
             <div className="grid grid-cols-6 ">
                 <div className="col-span-1 fixed">
@@ -82,7 +95,7 @@ const Dashboard = () => {
             </div>
         );
     }
-    else if (deliveryMan) {
+    else if (email === userDbData.email && userDbData.userType === 'deliveryMan') {
         return (
             <div className="grid grid-cols-6 ">
                 <div className="col-span-1 fixed">
@@ -90,8 +103,8 @@ const Dashboard = () => {
                     <ul className="menu p-4 min-h-screen    bg-base-200 text-base-content">
                         {/* Sidebar content here */}
                         <li className="hover:bg-gray-300 hover:rounded-md"><Link to='/dashboard/mydelivery'>My Delivery</Link></li>
-                        <li className="hover:bg-gray-300 hover:rounded-md"><Link to='/dashboard/allparcel'>All Parcel</Link></li>                      
-                        <li className="hover:bg-gray-300 hover:rounded-md"><Link to='/dashboard/reviews'>Reviews</Link></li>                      
+                        <li className="hover:bg-gray-300 hover:rounded-md"><Link to='/dashboard/allparcel'>All Parcel</Link></li>
+                        <li className="hover:bg-gray-300 hover:rounded-md"><Link to='/dashboard/reviews'>Reviews</Link></li>
                         <li className="hover:bg-gray-300 hover:rounded-md"><Link to='/'>Go Home</Link></li>
 
 
@@ -102,6 +115,34 @@ const Dashboard = () => {
                 <div className="col-span-5 relative left-56 mb-12">
                     <div className="">
                         <Outlet></Outlet>
+                    </div>
+
+                </div>
+            </div>
+        );
+    }
+    else{
+        return (
+            <div className="grid grid-cols-6">
+                <div className="col-span-1">
+
+                    <ul className="menu p-4  min-h-screen bg-base-200 text-base-content">
+                        {/* Sidebar content here */}
+                        <li><Link to='/dashboard/parcel-book'>Book A Parcel</Link></li>
+                        <li><Link to='/dashboard/my-parcel'>My Parcel</Link></li>
+                        <li><Link to='/dashboard/my-profile'>My Profile</Link></li>
+                        <li><Link to='/'>Go Home</Link></li>
+
+                    </ul>
+
+                </div>
+
+                <div className="col-span-5">
+
+                    <div className="">
+                        <Outlet></Outlet>
+
+
                     </div>
 
                 </div>

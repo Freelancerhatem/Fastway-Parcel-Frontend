@@ -1,22 +1,16 @@
-// import toast from "react-hot-toast";
-import { useLoaderData } from "react-router-dom";
+
 import MyParcelCard from "./MyParcelCard";
 import useMyBookinParcel from "../../../Hooks/useMyBookinParcel/useMyBookinParcel";
 
 
 const MyParcel = () => {
-    const myParcelData = useLoaderData();
-    // const{}
-    const [userParcel] = useMyBookinParcel();
-    console.log(userParcel)
     
-      
-
+    const [userParcel,refetch] = useMyBookinParcel();
     
     return (
         <div className="w-full p-14">
             <div className="table">
-                {/* head */}
+                
                 <div>
                     <div className="bg-green-300 justify-center text-center px-1 h-20 items-center  font-bold mt-12 rounded-md text-sm text-black  grid grid-cols-10">
                         <span>Parcel Type</span>
@@ -34,7 +28,7 @@ const MyParcel = () => {
                 <div className="">
 
                     {
-                        userParcel?.map((parcelContent, index) => <MyParcelCard parcelContent={parcelContent} index={index} key={index}></MyParcelCard>)
+                        userParcel?.map((parcelContent, index) => <MyParcelCard parcelContent={parcelContent} refetch={refetch} index={index} key={index}></MyParcelCard>)
                     }
 
                 </div>
