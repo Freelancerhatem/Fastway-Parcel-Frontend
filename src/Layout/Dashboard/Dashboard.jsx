@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
 import BarChartComponents from "../AdminDashboard/Charts/BarChartComponents";
 import LineChartsComponents from "../AdminDashboard/Charts/LineChartsComponents";
 import { useContext, useEffect, useState } from "react";
@@ -26,7 +26,7 @@ const Dashboard = () => {
     }, [axiosSecure, email])
 
 
-    if (email === userDbData.email && userDbData.userType === 'user' || email === userDbData.email && userDbData.TypeOfUser === 'isdeliveryMan') {
+    if (email === userDbData.email && userDbData.userType === 'user') {
         return (
             <div style={{backgroundImage:`url(${img})`}} className="grid bg-center bg-cover bg-no-repeat object-cover  grid-cols-6">
                 <div className="col-span-1">
@@ -39,7 +39,10 @@ const Dashboard = () => {
                         <li><Link to='/'>Go Home</Link></li>
                         <hr />
                         <button onClick={signOutUser} className="btn btn-sm  text-center absolute bottom-4 bg-slate-200">Logout</button>
-
+                        { !user?
+                            <Navigate to={'/'}></Navigate>
+                            :''
+                        }
                     </ul>
 
                 </div>
@@ -69,7 +72,10 @@ const Dashboard = () => {
                         <li><Link to='/dashboard/users'>All Users</Link></li>
                         <li><Link to='/'>Go Home</Link></li>
                         <button onClick={signOutUser} className="btn btn-sm  text-center absolute bottom-4 bg-slate-200">Logout</button>
-
+                        { !user?
+                            <Navigate to={'/'}></Navigate>
+                            :''
+                        }
 
 
                     </ul>
@@ -108,11 +114,14 @@ const Dashboard = () => {
                     <ul className="menu p-4 min-h-screen    bg-base-200 text-base-content">
                         {/* Sidebar content here */}
                         <li className="hover:bg-gray-300 hover:rounded-md"><Link to='/dashboard/mydelivery'>My Delivery</Link></li>
-                        <li className="hover:bg-gray-300 hover:rounded-md"><Link to='/dashboard/allparcel'>All Parcel</Link></li>
+                        
                         <li className="hover:bg-gray-300 hover:rounded-md"><Link to='/dashboard/reviews'>Reviews</Link></li>
                         <li className="hover:bg-gray-300 hover:rounded-md"><Link to='/'>Go Home</Link></li>
                         <button onClick={signOutUser} className="btn btn-sm  text-center absolute bottom-4 bg-slate-200">Logout</button>
-
+                        { !user?
+                            <Navigate to={'/'}></Navigate>
+                            :''
+                        }
 
                     </ul>
 
