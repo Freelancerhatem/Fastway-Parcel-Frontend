@@ -13,12 +13,13 @@ import AllUser from "../Layout/AdminDashboard/AllUser/AllUser";
 import MyDelivery from "../Layout/DeliveryManDashBoard/MyDelivery/MyDelivery";
 import MyReviews from "../Layout/DeliveryManDashBoard/MyReviews/MyReviews";
 import UpdateParcel from "../Layout/Dashboard/UpdateParcel/UpdateParcel";
+import Error from "../Pages/Error/Error";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
-        errorElement: 'this is error page',
+        errorElement: <Error></Error>,
         children: [
             {
                 path: '/',

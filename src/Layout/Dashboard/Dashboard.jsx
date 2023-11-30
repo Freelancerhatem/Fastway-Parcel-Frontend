@@ -4,6 +4,7 @@ import LineChartsComponents from "../AdminDashboard/Charts/LineChartsComponents"
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useAxiosSecure from "../../Hooks/useAxiosSecure/useAxiosSecure";
+import img from '../../assets/images/1.png'
 
 
 const Dashboard = () => {
@@ -15,9 +16,9 @@ const Dashboard = () => {
     const mypath = '/dashboard';
 
     // check user type
-    const { user } = useContext(AuthContext);
+    const { user,signOutUser } = useContext(AuthContext);
     const [userDbData, setuserDbData] = useState({})
-    const { email } = user;
+    const { email } = user || "";
 
     useEffect(() => {
         axiosSecure.get(`/loginUserType?user=${email}`)
@@ -27,7 +28,7 @@ const Dashboard = () => {
 
     if (email === userDbData.email && userDbData.userType === 'user' || email === userDbData.email && userDbData.TypeOfUser === 'isdeliveryMan') {
         return (
-            <div className="grid grid-cols-6">
+            <div style={{backgroundImage:`url(${img})`}} className="grid bg-center bg-cover bg-no-repeat object-cover  grid-cols-6">
                 <div className="col-span-1">
 
                     <ul className="menu p-4  min-h-screen bg-base-200 text-base-content">
@@ -36,6 +37,8 @@ const Dashboard = () => {
                         <li><Link to='/dashboard/my-parcel'>My Parcel</Link></li>
                         <li><Link to='/dashboard/my-profile'>My Profile</Link></li>
                         <li><Link to='/'>Go Home</Link></li>
+                        <hr />
+                        <button onClick={signOutUser} className="btn btn-sm  text-center absolute bottom-4 bg-slate-200">Logout</button>
 
                     </ul>
 
@@ -65,6 +68,8 @@ const Dashboard = () => {
                         <li><Link to='/dashboard/employees'>All Delivery Man</Link></li>
                         <li><Link to='/dashboard/users'>All Users</Link></li>
                         <li><Link to='/'>Go Home</Link></li>
+                        <button onClick={signOutUser} className="btn btn-sm  text-center absolute bottom-4 bg-slate-200">Logout</button>
+
 
 
                     </ul>
@@ -106,6 +111,7 @@ const Dashboard = () => {
                         <li className="hover:bg-gray-300 hover:rounded-md"><Link to='/dashboard/allparcel'>All Parcel</Link></li>
                         <li className="hover:bg-gray-300 hover:rounded-md"><Link to='/dashboard/reviews'>Reviews</Link></li>
                         <li className="hover:bg-gray-300 hover:rounded-md"><Link to='/'>Go Home</Link></li>
+                        <button onClick={signOutUser} className="btn btn-sm  text-center absolute bottom-4 bg-slate-200">Logout</button>
 
 
                     </ul>
@@ -121,34 +127,34 @@ const Dashboard = () => {
             </div>
         );
     }
-    else{
-        return (
-            <div className="grid grid-cols-6">
-                <div className="col-span-1">
+    // else{
+    //     return (
+    //         <div className="grid grid-cols-6">
+    //             <div className="col-span-1">
 
-                    <ul className="menu p-4  min-h-screen bg-base-200 text-base-content">
-                        {/* Sidebar content here */}
-                        <li><Link to='/dashboard/parcel-book'>Book A Parcel</Link></li>
-                        <li><Link to='/dashboard/my-parcel'>My Parcel</Link></li>
-                        <li><Link to='/dashboard/my-profile'>My Profile</Link></li>
-                        <li><Link to='/'>Go Home</Link></li>
+    //                 <ul className="menu p-4  min-h-screen bg-base-200 text-base-content">
+    //                     {/* Sidebar content here */}
+    //                     <li><Link to='/dashboard/parcel-book'>Book A Parcel</Link></li>
+    //                     <li><Link to='/dashboard/my-parcel'>My Parcel</Link></li>
+    //                     <li><Link to='/dashboard/my-profile'>My Profile</Link></li>
+    //                     <li><Link to='/'>Go Home</Link></li>
 
-                    </ul>
+    //                 </ul>
 
-                </div>
+    //             </div>
 
-                <div className="col-span-5">
+    //             <div className="col-span-5">
 
-                    <div className="">
-                        <Outlet></Outlet>
+    //                 <div className="">
+    //                     <Outlet></Outlet>
 
 
-                    </div>
+    //                 </div>
 
-                </div>
-            </div>
-        );
-    }
+    //             </div>
+    //         </div>
+    //     );
+    // }
 
 };
 

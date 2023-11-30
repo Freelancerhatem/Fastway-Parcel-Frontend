@@ -12,7 +12,7 @@ const Featured = () => {
     },[])
     return (
         <>
-            <div className="grid gap-12 grid-cols-3 px-14">
+            <div className="grid gap-12 grid-cols-1  lg:grid-cols-3 px-14">
             {
                 Data.map((singledata,idx)=><FeaturedCard key={idx} singledata={singledata}></FeaturedCard>)
             }

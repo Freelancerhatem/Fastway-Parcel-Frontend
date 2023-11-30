@@ -60,7 +60,7 @@ const MyProfile = () => {
 
             </div>
             <div className='w-full absolute top-32 z-20 px-32  h-5/6'>
-                <div className='bg-green-300 relative  rounded-md w-full h-5/6'>
+                <div className='bg-green-200 relative  rounded-md w-full h-5/6'>
                     <img className='w-24 h-24 absolute left-[calc(50%-48px)] -top-12 rounded-full bg-red-400 ' src={image? image : photoURL} alt="" />
                     <div className='relative flex flex-col top-6 left-14'>
                         <span className='text-3xl font-bold'>{user.displayName}</span>

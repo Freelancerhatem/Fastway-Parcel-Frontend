@@ -69,7 +69,7 @@ const SignUp = () => {
 
     return (
         <div className="flex bg-no-repeat max-w-full h-screen  bg-center bg-cover" style={{ backgroundImage: BackImage }} >
-            <Link to={'/'}><button className=" absolute top-2 flex justify-center items-center  left-2 w-12 h-12 bg-green-200 rounded-full"><FaHome></FaHome></button></Link>
+            <Link to='/'><button className=" absolute top-2 flex justify-center items-center  left-2 w-12 h-12 bg-green-200 rounded-full"><FaHome></FaHome></button></Link>
             <Toaster></Toaster>
             <div className="container mx-auto absolute   py-8">
                 <h1 className="text-2xl font-bold mb-6 text-green-400 text-center">Sign Up</h1>
