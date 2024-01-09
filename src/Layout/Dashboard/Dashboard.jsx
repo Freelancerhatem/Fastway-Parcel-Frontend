@@ -4,7 +4,7 @@ import LineChartsComponents from "../AdminDashboard/Charts/LineChartsComponents"
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import useAxiosSecure from "../../Hooks/useAxiosSecure/useAxiosSecure";
-import img from '../../assets/images/1.png'
+
 
 
 const Dashboard = () => {
@@ -19,6 +19,9 @@ const Dashboard = () => {
     const { user,signOutUser } = useContext(AuthContext);
     const [userDbData, setuserDbData] = useState({})
     const { email } = user || "";
+    const emailUser = email.split('@')[1]=='gmail.com';
+    console.log(emailUser);
+    
 
     useEffect(() => {
         axiosSecure.get(`/loginUserType?user=${email}`)
@@ -26,9 +29,9 @@ const Dashboard = () => {
     }, [axiosSecure, email])
 
 
-    if (email === userDbData.email && userDbData.userType === 'user') {
+    if (email === userDbData.email && userDbData.userType === 'user' || emailUser) {
         return (
-            <div style={{backgroundImage:`url(${img})`}} className="grid bg-center bg-cover bg-no-repeat object-cover  grid-cols-6">
+            <div  className="grid bg-center bg-cover bg-no-repeat object-cover  grid-cols-6">
                 <div className="col-span-1">
 
                     <ul className="menu p-4  min-h-screen bg-base-200 text-base-content">
@@ -136,34 +139,7 @@ const Dashboard = () => {
             </div>
         );
     }
-    // else{
-    //     return (
-    //         <div className="grid grid-cols-6">
-    //             <div className="col-span-1">
-
-    //                 <ul className="menu p-4  min-h-screen bg-base-200 text-base-content">
-    //                     {/* Sidebar content here */}
-    //                     <li><Link to='/dashboard/parcel-book'>Book A Parcel</Link></li>
-    //                     <li><Link to='/dashboard/my-parcel'>My Parcel</Link></li>
-    //                     <li><Link to='/dashboard/my-profile'>My Profile</Link></li>
-    //                     <li><Link to='/'>Go Home</Link></li>
-
-    //                 </ul>
-
-    //             </div>
-
-    //             <div className="col-span-5">
-
-    //                 <div className="">
-    //                     <Outlet></Outlet>
-
-
-    //                 </div>
-
-    //             </div>
-    //         </div>
-    //     );
-    // }
+    
 
 };
 

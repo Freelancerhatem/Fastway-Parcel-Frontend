@@ -6,7 +6,7 @@ const TypedTextComponent = () => {
 
   useEffect(() => {
     const options = {
-      strings: [' Reliable Parcel Services Delivered with Care', ' Your Trusted Partner for Quick, Safe, and Efficient Parcel Services','Connecting People and Businesses with Seamless Delivery Solutions'],
+      strings: ['Swift and Secure Deliveries!',' Global Reach, Local Touch', 'Track, Trace, and Trust!'],
       typeSpeed: 50,
       backSpeed: 30,
       loop: true,

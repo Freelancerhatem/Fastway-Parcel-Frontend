@@ -10,7 +10,6 @@ const SignIn = () => {
     const{LoginUser,googleLogin,user}=useContext(AuthContext);
     const navigate =useNavigate()
     const location = useLocation();
-    console.log(user)
     
     const handleLogin =e=>{
         e.preventDefault();
@@ -30,22 +29,28 @@ const SignIn = () => {
         form.password.value='';
     }
     // google login
-    const handleGoogleLogin =()=>{
+    const handleGoogleLogin =(e)=>{
+        e.preventDefault();
         googleLogin()
-        if(user || ''){
-            toast.success('login success');
-            navigate(`${location?.state?  location.state : '/' }`)
-
-        }
+        .then(()=>{
+                console.log('then')
+                toast.success('login success');
+                navigate(`${location?.state?  location.state : '/' }`)
+    
+            
+        })
+        .catch(()=>{
+            toast.error('failed')
+        })
         
         
         
         
         
     }
-    const BackImage = `url(${img})`;
+    
     return (
-        <div className=" flex items-center bg-no-repeat max-w-full h-screen    bg-center  bg-cover" style={{ backgroundImage: BackImage }} >
+        <div className=" flex items-center bg-no-repeat max-w-full h-screen    bg-center  bg-cover"  >
              <Link to={'/'}><button className=" absolute top-2 flex justify-center items-center  left-2 w-12 h-12 bg-green-200 rounded-full"><FaHome className=""></FaHome></button></Link>
             <Toaster></Toaster>
             

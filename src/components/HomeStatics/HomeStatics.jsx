@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAllParcel from "../../Hooks/useAllParcel/useAllParcel";
 import useUsers from "../../Hooks/useUsers";
+import NumberCount from "../NumberCount/NumberCount";
 
 
 
@@ -32,7 +33,7 @@ const HomeStatics = () => {
             <div className="stat">
                 
                 <div className="stat-title text-xl font-bold text-black">Total Users</div>
-                <div className="stat-value text-primary text-center">{TotalUser}</div>
+                <div className="stat-value text-primary text-center"><NumberCount endValue={TotalUser}></NumberCount></div>
                 
             </div>
 

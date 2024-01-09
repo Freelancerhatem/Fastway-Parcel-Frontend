@@ -14,6 +14,8 @@ import MyDelivery from "../Layout/DeliveryManDashBoard/MyDelivery/MyDelivery";
 import MyReviews from "../Layout/DeliveryManDashBoard/MyReviews/MyReviews";
 import UpdateParcel from "../Layout/Dashboard/UpdateParcel/UpdateParcel";
 import Error from "../Pages/Error/Error";
+import PrivateRoute from "../Private/PrivateRoute";
+import TraceParcel from "../Pages/TraceParcel/TraceParcel";
 
 export const router = createBrowserRouter([
     {
@@ -34,6 +36,10 @@ export const router = createBrowserRouter([
                 path: 'signup',
                 element: <SignUp></SignUp>,
             },
+            {
+                path: 'trace_parcel',
+                element: <TraceParcel></TraceParcel>,
+            },
             
 
 
@@ -41,7 +47,7 @@ export const router = createBrowserRouter([
     },
     {
         path:'/dashboard',
-        element:<Dashboard></Dashboard>,
+        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children:[
             // normal user routes
             {

@@ -1,19 +1,16 @@
 [
     {
-      "icon": "⚡️",
-      "img":"https://www.kindpng.com/picc/b/22-222129_fast-delivery-logo-png-transparent-png.png",
+      "id": "1",
       "title": "Fast Delivery",
       "description": "Experience lightning-fast delivery with our efficient logistics network. We guarantee swift transportation and timely deliveries, ensuring that your parcels reach their destination well ahead of schedule."
     },
     {
-      "icon": "📦",
-      "img":"https://img.freepik.com/free-vector/3d-delivery-box-parcel_78370-825.jpg",
+      "id": "2",
       "title": "Parcel Safety",
       "description": "Our top priority is the safety of your parcels. We use state-of-the-art security measures to ensure that your packages are handled and delivered securely, giving you peace of mind throughout the entire delivery process."
     },
     {
-      "icon": "🤝",
-      "img":"https://sd-lb.com/wp-content/uploads/2019/11/Support-PNG-Transparent-Picture.png",
+      "id": "3",
       "title": "Support",
       "description": "Count on our dedicated support team to assist you every step of the way. From tracking your parcels to addressing any concerns, our customer support is committed to providing you with a seamless and satisfactory experience."
     }

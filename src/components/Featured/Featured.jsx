@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import FeaturedCard from "./FeaturedCard/FeaturedCard";
 import HomeStatics from "../HomeStatics/HomeStatics";
 
+
 const Featured = () => {
     const[Data,setData]=useState([]);
     
@@ -16,9 +17,11 @@ const Featured = () => {
             {
                 Data.map((singledata,idx)=><FeaturedCard key={idx} singledata={singledata}></FeaturedCard>)
             }
+
             </div>
             <div className="mt-12 max-w-[100vw] flex justify-center">
                 <HomeStatics></HomeStatics>
+                
             </div>
 
         </>
