@@ -1,6 +1,5 @@
 import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import img from '../../assets/images/signupcover.jpg'
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { auth } from "../../firebase/firebase.config";
@@ -122,9 +121,9 @@ const SignUp = () => {
                     </div>
                     <div>
                         <button
-                            className="w-full bg-[#1db7ad] text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-[white] hover:text-[#1db7ad] hover:border-2 hover:border-[#1db7ad] "
+                            className="w-full bg-[#1db7ad] text-white text-sm font-semibold border-2 border-transparent py-2 px-4 rounded-md hover:bg-[white] hover:text-[#1db7ad] hover:border-2 hover:border-[#1db7ad] "
                             type="submit">Create Account</button>
-                        <span>Have  an account <Link to={'/signin'}><span className="text-blue-500 underline">Login</span></Link></span>
+                        <span>Have  an account <Link to={'/signin'}><span className="text-[#1db7ad] underline">Login</span></Link></span>
                     </div>
                 </form>
             </div>

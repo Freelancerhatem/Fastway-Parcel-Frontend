@@ -2,7 +2,7 @@ import img from '../../assets/images/logo_1.png'
 
 const Footer = () => {
     return (
-        <div className="text-5xl mt-32 ">
+        <div className="text-5xl  ">
             <footer className="footer px-4 lg:p-14 bg-slate-100 text-base-content">
   <nav className="text-xs lg:text-base flex lg:flex-col mt-6 lg:mt-0">
     <header className="lg:footer-title font-bold">Services</header> 
