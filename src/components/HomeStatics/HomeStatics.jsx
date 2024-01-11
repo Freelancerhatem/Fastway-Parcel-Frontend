@@ -40,13 +40,13 @@ const HomeStatics = () => {
             <div className="stat">
                 
                 <div className="stat-title text-xl font-bold text-black"> Parcel Booked</div>
-                <div className="stat-value text-secondary text-center">{BookedPercel.length}</div>
+                <div className="stat-value text-secondary text-center"><NumberCount endValue={BookedPercel.length}></NumberCount></div>
                 
             </div>
 
             <div className="stat">
             <div className="stat-title text-xl font-bold text-black"> Parcel Delivered</div>
-                <div className="stat-value text-center">{deliveredData.length}</div>
+                <div className="stat-value text-center"><NumberCount endValue={deliveredData.length}></NumberCount></div>
                 
                 
             </div>

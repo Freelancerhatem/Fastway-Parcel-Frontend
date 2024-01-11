@@ -1,11 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 import LottieAnimation from "../LottieAnimation/LottieAnimation";
-import anim from '../../assets/animation/anim1.json'
+import anim from '../../assets/animation/anim2.json'
 import { IoCall } from "react-icons/io5";
 
 const Promotion = () => {
     return (
-        <div className="grid grid-cols-2 justify-center items-center h-[70vh]">
+        <div className="grid grid-cols-2 justify-center items-end h-[60vh]">
             <div>
                 <LottieAnimation anim={anim}></LottieAnimation>
             </div>

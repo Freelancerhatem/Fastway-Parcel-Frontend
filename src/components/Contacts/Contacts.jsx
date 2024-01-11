@@ -23,7 +23,7 @@ const Contacts = () => {
       };
     return (
         <div name='contact_us'  className="mt-12">
-            <SectionTitle header={'Contact Us'} text={'If you have any questions, concerns, or feedback, please feel free to reach out to us. We value your input and are here to assist you.S'}></SectionTitle>
+            <SectionTitle header={'Contact Us'} text={'Any questions or feedback, please feel free to reach out to us.'}></SectionTitle>
             <div className="grid grid-cols-1 lg:grid-cols-5 ">
             <div  className="flex  lg:col-span-3 mx-auto lg:mx-0  lg:pl-12">
                 <div className="relative flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none">

@@ -6,7 +6,7 @@ const LottieAnimation = ({anim}) => {
 
             <Player
                 src={anim}
-                className="player w-1/2"
+                className="player w-[70%]"
                 loop
                 autoplay
             />
